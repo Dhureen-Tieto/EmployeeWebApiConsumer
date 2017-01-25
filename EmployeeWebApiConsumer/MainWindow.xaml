@@ -1,169 +1,131 @@
 ﻿<Window x:Class="EmployeeWebApiConsumer.MainWindow" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        Title="MainWindow" Height="500" Width="600" Background="Green" >
+        Title="Employee Manager" Height="550" Width="600" Background="White" >
     <Window.Resources>
-        <ControlTemplate x:Key="btnTemplate" TargetType="Button">
-            <Grid>
-                <Rectangle RadiusX="5" RadiusY="5" Fill="Aquamarine">
-                </Rectangle>
-                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
-            </Grid>
-        </ControlTemplate>
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="13"></Setter>
-        </Style>
-        <Style x:Key="tbkStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="13"></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Margin" Value="100,0,0,0"></Setter>
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel x:Name="employeePanel" Grid.Column="0">
-            <TextBlock Text="List of employees" FontSize="20" FontWeight="ExtraBold"></TextBlock>
-            <ListView x:Name="employeeListView" Margin="0,10,0,0" Background="Transparent" Height="400" ScrollViewer.CanContentScroll="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource tbkStyle}">
-                                <TextBlock.Inlines>
-                                    <Run Text="Id : "></Run>
-                                    <Run Text="{Binding Id}"></Run>
-                                </TextBlock.Inlines>
-                            </TextBlock>
-                            <TextBlock Style="{StaticResource tbkStyle}">
-                                <TextBlock.Inlines>
-                                    <Run Text="First Name : "></Run>
-                                    <Run Text="{Binding FirstName}"></Run>
-                                </TextBlock.Inlines>
-                            </TextBlock>
-                            <TextBlock Style="{StaticResource tbkStyle}">
-                                <TextBlock.Inlines>
-                                    <Run Text="Last Name : "></Run>
-                                    <Run Text="{Binding LastName}"></Run>
-                                </TextBlock.Inlines>
-                            </TextBlock>
-                            <TextBlock Style="{StaticResource tbkStyle}">
-                                <TextBlock.Inlines>
-                                    <Run Text="Email Id : "></Run>
-                                    <Run Text="{Binding EmailId}"></Run>
-                                    <LineBreak/>
-                                </TextBlock.Inlines>
-                            </TextBlock>
-                            <TextBlock Style="{StaticResource tbkStyle}">
-                                <TextBlock.Inlines>
-                                    <Run Text="Phone Number : "></Run>
-                                    <Run Text="{Binding PhoneNumber}"></Run>
-                                    <LineBreak/>
-                                </TextBlock.Inlines>
-                            </TextBlock>
-                            <TextBlock Style="{StaticResource tbkStyle}">
-                                <TextBlock.Inlines>
-                                    <Run Text="Age : "></Run>
-                                    <Run Text="{Binding Age}"></Run>
-                                    <LineBreak/>
-                                </TextBlock.Inlines>
-                            </TextBlock>
-                            <TextBlock Style="{StaticResource tbkStyle}">
-                                <TextBlock.Inlines>
-                                    <Run Text="Active "></Run>
-                                    <Run Text="{Binding ActiveStatus}"></Run>
-                                    <LineBreak/>
-                                </TextBlock.Inlines>
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Margin="10,0,0,0">
-                <TextBlock Text="Add or Update an Employee" FontSize="20" FontWeight="ExtraBold"></TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Id" Width="75"></TextBlock>
-                    <TextBox x:Name="txtEmployeeId" Margin="10,0,0,0" Width="200"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="First Name" Width="75"></TextBlock>
-                    <TextBox x:Name="txtEmployeeFirstName" Margin="10,0,0,0" Width="200"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Last Name" Width="75"></TextBlock>
-                    <TextBox x:Name="txtEmployeeLastName" Margin="10,0,0,0" Width="200"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Email Id" Width="75"></TextBlock>
-                    <TextBox x:Name="txtEmployeeEmailId" Margin="10,0,0,0" Width="200"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Phone Number" Width="75"></TextBlock>
-                    <TextBox x:Name="txtPhoneNumber" InputScope="Number" Margin="10,0,0,0" Width="200"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Age" Width="75"></TextBlock>
-                    <TextBox x:Name="txtAge" InputScope="Number" Margin="10,0,0,0" Width="200"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Record Status" Width="75"></TextBlock>
-                    <ComboBox x:Name="cbxStatus" Margin="10,0,0,0" Width="200" Text="--Select a Status--" IsReadOnly="True" IsEditable="True"></ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button x:Name="btnNewEmployee" Template="{StaticResource btnTemplate}" Content=" Add New Employee " Margin="0,0,10,0" Click="btnNewEmployee_Click"></Button>
-                    <Button x:Name="btnUpdate" Template="{StaticResource btnTemplate}" Content=" Update Employee " Click="btnUpdate_Click"></Button>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Margin="10,0,0,0">
-                <TextBlock Text="Get or delete an Employee" FontSize="20" FontWeight="ExtraBold"></TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBlock Text="Enter the Employee ID" Width="150"></TextBlock>
-                    <TextBox x:Name="txtId" InputScope="Number" Margin="10,0,0,0" Width="100"></TextBox>
-                </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*"/>            
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="2">
+            <StackPanel x:Name="employeeListPanel" Grid.Row="0" >
 
-                <StackPanel x:Name="employeeDetailsPanel" Margin="10,0,0,0" Visibility="Collapsed">
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Id  :" Width="75"></TextBlock>
-                        <TextBlock x:Name="txbEmployeeId" Text="{Binding Id}" Margin="10,0,0,0" Width="200"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="First Name : " Width="75"></TextBlock>
-                        <TextBlock x:Name="txbEmployeeFirstName" Margin="10,0,0,0" Text="{Binding FirstName}" Width="200"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Last Name : " Width="75"></TextBlock>
-                        <TextBlock x:Name="txbEmployeeLastName" Margin="10,0,0,0" Text="{Binding LastName}" Width="200"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Email Id : " Width="75"></TextBlock>
-                        <TextBlock x:Name="txbEmployeeEmailId" Margin="10,0,0,0" Text="{Binding EmailId}" Width="200"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Phone Number : " Width="75"></TextBlock>
-                        <TextBlock x:Name="txbPhoneNumber" Margin="10,0,0,0" Text="{Binding PhoneNumber}" Width="200"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Age : " Width="75"></TextBlock>
-                        <TextBlock x:Name="txbAge" InputScope="Number" Margin="10,0,0,0" Width="200" Text="{Binding Age}"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Record Status : " Width="75"></TextBlock>
-                        <TextBlock x:Name="txbStatus" InputScope="Number" Margin="10,0,0,0" Width="200" Text="{Binding ActiveStatus}"></TextBlock>
-                    </StackPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button x:Name="btnGetEmployee" Template="{StaticResource btnTemplate}" Content=" Get an Employee " Margin="0,0,10,0" Click="btnGetEmployee_Click"></Button>
-                    <Button x:Name="btnDeleteEmployee" Template="{StaticResource btnTemplate}" Content=" Delete an Employee " Click="btnDeleteEmployeeClick"></Button>
-                </StackPanel>
+                <DataGrid ItemsSource="{Binding EmployeeList, NotifyOnSourceUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedItem="{Binding SelectedEmployee}" AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Path=Id, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Email Id" Binding="{Binding Path=EmailId, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Phone Number" Binding="{Binding Path=PhoneNumber, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Age" Binding="{Binding Path=Age, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Record Status" Binding="{Binding Path=ActiveStatus, Mode=TwoWay}"/>
+                    </DataGrid.Columns>                    
+                </DataGrid>
+                <Grid Margin="0,15,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Button Name="RefreshButton" Command="{Binding Path=RefreshCommand, Mode=TwoWay}" Content="Refresh" Height="25" Width="80"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button Name="EditButton" Command="{Binding Path=EditCommand, Mode=TwoWay}" Content="Edit" Height="25" Width="80"/>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button Name="DeleteButton" Command="{Binding Path=DeleteCommand, Mode=TwoWay}" Content="Delete" Height="25" Width="80"/>
+                    </Grid>
+                </Grid>
             </StackPanel>
+        </Border>        
+            <Grid  Grid.Row="1" >                
+            <Border BorderBrush="Black" BorderThickness="2">
+                <StackPanel Grid.Column="0" >
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Grid}">
+                            <Setter Property="Margin" Value="0,10,0,0"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <Grid>
+                            <TextBlock Text="Add Employee"/>
+                        </Grid>
+                    </Border>                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Id"/>
+                        <TextBox Grid.Column="1" Height="25" Text="{Binding Path=EmployeeToBeAdded.Id , Mode=TwoWay}" Margin="0,0,10,0"/>
+                    </Grid>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="First Name"/>
+                        <TextBox Grid.Column="1" Height="25" Text="{Binding Path=EmployeeToBeAdded.FirstName , Mode=TwoWay}" Margin="0,0,10,0"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Last Name"/>
+                        <TextBox Grid.Column="1" Height="25" Text="{Binding Path=EmployeeToBeAdded.LastName , Mode=TwoWay}" Margin="0,0,10,0"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Email Id"/>
+                        <TextBox Grid.Column="1" Height="25" Text="{Binding Path=EmployeeToBeAdded.EmailId , Mode=TwoWay}" Margin="0,0,10,0"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Phone Number"/>
+                        <TextBox Grid.Column="1" Height="25" Text="{Binding Path=EmployeeToBeAdded.PhoneNumber , Mode=TwoWay}" Margin="0,0,10,0"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Age"/>
+                        <TextBox Grid.Column="1" Height="25" Text="{Binding Path=EmployeeToBeAdded.Age , Mode=TwoWay}" Margin="0,0,10,0"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Record Status"/>
+                        <TextBox Grid.Column="1" Height="25" Text="{Binding Path=EmployeeToBeAdded.ActiveStatus , Mode=TwoWay}" Margin="0,0,10,0"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Command="{Binding Path=AddCommand, Mode=TwoWay}" Name="AddButton" Content="Add" Height="25" Width="80"/>
+                    </Grid>
+                </StackPanel>
+          </Border>       
         </Grid>
     </Grid>
 </Window> 
